@@ -1,13 +1,14 @@
 
 // middleware for authorization
-import {admin} from "../database/index.database.js"
+import {user} from "../database/index.database.js"
 
 
-const adminMiddleware = async(req,res,next)=>{
-    const username = await req.headers.username
-    const password = await req.headers.password
 
-    admin.findOne({
+const userMiddleware = async(req,res,next)=>{
+    const username = req.headers.username
+    const password = req.headers.password
+
+    user.findOne({
         username:username
     })
     .then(function(value){
@@ -33,5 +34,5 @@ next()
 
 
 }
-export default adminMiddleware
 
+module.exports = userMiddleware
